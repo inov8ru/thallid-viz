@@ -297,7 +297,15 @@ class Api():
 	#def get_recovery_request(self, tx, keys):								#Bad
 	#	return self.rpc.call('get_recovery_request', tx, keys)
 
-	
+
+	def lookup_accounts(self, lowerBoundName, limit):
+
+		logins = self.rpc.call('lookup_accounts', lowerBoundName, limit)
+		print('find', len(logins), 'accounts')	
+		
+		return logins
+
+
 	def get_all_accounts(self):
 	
 		n = self.get_account_count()
@@ -423,6 +431,7 @@ class Api():
 	#def get_witnesses_by_vote(self, start, limit):
 	#	return self.rpc.call('get_witnesses_by_vote', start, limit)
 	
+
 	def lookup_witness_accounts(self, start, limit):
 		return self.rpc.call('lookup_witness_accounts', start, limit)
 	

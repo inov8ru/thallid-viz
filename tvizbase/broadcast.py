@@ -161,7 +161,7 @@ class Tx():
 			lenR = sigder[3]
 			lenS = sigder[5 + lenR]
 			
-			if lenR is 32 and lenS is 32:
+			if lenR == 32 and lenS == 32:
 				# Derive the recovery parameter
 				pubkey = sk.get_verifying_key()
 				### i = self.recoverPubkeyParameter(digest, signature, sk.get_verifying_key())
