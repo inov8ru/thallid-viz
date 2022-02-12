@@ -5,7 +5,7 @@ Thallid-VIZ библиотека для блокчейна VIZ
 
 # Installation
 
-https://github.com/ksantoprotein/thallid-viz.git
+`python setup.py install`
 
 # Documentation
 
