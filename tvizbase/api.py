@@ -148,7 +148,7 @@ class Api():
 
 ######### database_api #########
 
-	def get_account_count(self):										# Возвращает количество зарегестрированных пользователей
+	def get_account_count(self):										# Возвращает количество зарегистрированных пользователей
 		return(int( self.rpc.call('get_account_count') ))
 	
 	def get_accounts(self, logins, **kwargs):							#need correct
@@ -301,7 +301,7 @@ class Api():
 	def lookup_accounts(self, lowerBoundName, limit):
 
 		logins = self.rpc.call('lookup_accounts', lowerBoundName, limit)
-		print('find', len(logins), 'accounts')	
+		# print('find', len(logins), 'accounts')	
 		
 		return logins
 
@@ -311,26 +311,21 @@ class Api():
 		n = self.get_account_count()
 		limit = 1000
 		print('find', n, 'accounts')
-		
-		accounts_dict = {}
 		start_login = 'a'
+		accounts_list = []
+	
+		accounts_list.append(start_login)
 		while True:
-			print(start_login)
+            
 			logins = self.rpc.call('lookup_accounts', start_login, limit)
-			
+
 			if len(logins) == 1 and logins[0] == start_login:
-				accounts = self.get_accounts(logins)
-				for account in accounts:
-					accounts_dict[account["name"]] = account
 				break
 
-			accounts = self.get_accounts(logins[:-1])
-			for account in accounts:
-				accounts_dict[account["name"]] = account
-
+			accounts_list = accounts_list+logins[1:]
 			start_login = logins[-1:][0]
 	
-		return accounts_dict
+		return accounts_list
 		
 ######### operation_history #########
 	
